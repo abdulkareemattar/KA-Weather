@@ -133,7 +133,7 @@ class Onboard extends StatelessWidget {
                     curve: Curves.fastEaseInToSlowEaseOut),
                 txt: S.of(context).back,
                 clr: Colors.blueAccent):SizedBox.shrink(),
-
+            (currentPage!=2)?
             Button(
                 onpressed: () => Navigator.pushAndRemoveUntil(
                     context,
@@ -147,7 +147,7 @@ class Onboard extends StatelessWidget {
                     ),
                         (route) => false),
                 txt: S.of(context).skip,
-                clr: Colors.purpleAccent)
+                clr: Colors.purpleAccent):SizedBox.shrink()
           ],
         ),
       ),
