@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:weatherapp/models/onboard_model.dart';
 
-int pageIndex = 0;
 PageController pageController = PageController();
 
 Widget onboardcatgeory(

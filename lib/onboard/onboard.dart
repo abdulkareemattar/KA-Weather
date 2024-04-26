@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:weatherapp/Providers/Onboard_Provider.dart';
 import 'package:weatherapp/data/list_of_onboard_pages.dart';
 
 import '../Providers/language_Provider.dart';
@@ -11,17 +12,15 @@ import '../catgeory/onboard_catgeory.dart'; // Assuming this is the correct path
 import '../generated/l10n.dart';
 import '../pages/home_screen.dart';
 
-// ignore: must_be_immutable
 class Onboard extends StatelessWidget {
    Onboard({Key? key}) : super(key: key);
 
-   int pageIndex = 0;
   final PageController pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
     Brightness theme = Provider.of<ThemeProvider>(context).thememode;
-
+     int currentPage=Provider.of<OnboardProvider>(context).currentPage;
     Map<String, String> languageMap = {
       'English': 'en',
       'Arabic': 'ar',
@@ -85,7 +84,7 @@ class Onboard extends StatelessWidget {
                   itemCount: onboard(context).length,
                   controller: pageController,
                   onPageChanged: (int i) {
-                    pageIndex = i;
+                    Provider.of<OnboardProvider>(context,listen: false).setCurPage(i);
                   },
                 ),
               ),
@@ -108,7 +107,7 @@ class Onboard extends StatelessWidget {
             ),
             Button(
                 onpressed: () {
-                  (pageIndex == onboard(context).length - 1)
+                  (currentPage == onboard(context).length - 1)
                       ? Navigator.push(
                     context,
                     PageRouteBuilder(
@@ -127,7 +126,7 @@ class Onboard extends StatelessWidget {
 
                 txt: S.of(context).next,
                 clr: Colors.orange),
-            (pageIndex==0)?
+            (currentPage!=0)?
             Button(
                 onpressed: () => pageController.previousPage(
                     duration: const Duration(seconds: 1),
